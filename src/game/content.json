@@ -1,0 +1,668 @@
+{
+  "finalMessage": "Teach the children. Shape the future. Save the Earth.",
+  "objective": [
+    "Mars Academy aims to spark children's interest in science, technology and space exploration in a fun, interactive way, presenting the reality of Mars and the challenges of living on the red planet.",
+    "During the missions, players face situations that simulate the difficulties of a possible settlement on Mars, such as shortages of water, oxygen, food and energy. Through these experiences, they develop critical thinking, learn to manage resources and understand the consequences of their choices.",
+    "Beyond encouraging space exploration, the game seeks to make children aware that Mars is not a perfect alternative for humanity. Even with technological progress, no other planet offers Earth's natural conditions. Our mission is to show that exploring the universe is important, but preserving our home is essential!"
+  ],
+  "story": [
+    "Year: 2045. Earth faces climate change, environmental degradation and resource shortages.",
+    "NASA creates Project New Horizon to study a future human presence on other planets.",
+    "The destination is Mars. Four astronauts leave for a 10-day experimental expedition.",
+    "After landing, communication with Earth fails. Supplies and equipment must be reassessed.",
+    "The support team arrives only on Day 10. Until then, resources must be preserved and everyone kept safe.",
+    "You will take part through a NASA simulation. Choose your astronaut!"
+  ],
+  "days": [
+    {
+      "day": 1,
+      "title": "Dust storm",
+      "npc": "andreas",
+      "situation": "A huge dust storm covers the sky. Weak sunlight reaches the solar panels, and we need to save energy.",
+      "science": "Mars has dust storms that reduce sunlight for solar panels, and dust builds up on equipment.",
+      "choices": [
+        {
+          "label": "A — Turn off non-essential equipment",
+          "fx": {
+            "energy": 10,
+            "health": -2
+          },
+          "why": "Saving energy keeps important systems running, but switching off comfort and leisure increases stress."
+        },
+        {
+          "label": "B — Keep all equipment running",
+          "fx": {
+            "health": 2,
+            "energy": -15
+          },
+          "why": "Lighting and comfort support well-being, but batteries run out faster."
+        },
+        {
+          "label": "C — Go outside to clean the solar panels",
+          "fx": {
+            "energy": 10,
+            "health": -5
+          },
+          "why": "Clean panels capture more light, but going out in the storm exposes the team to risks."
+        }
+      ],
+      "source": 8
+    },
+    {
+      "day": 2,
+      "title": "Radiation alert",
+      "npc": "lina",
+      "situation": "Sensors warn that the team could receive a higher radiation dose. How can we protect ourselves without using all our resources?",
+      "science": "Mars has a thin atmosphere and no strong global magnetic field. Its surface provides little protection from energetic particles from the Sun.",
+      "choices": [
+        {
+          "label": "A — Reinforce the shelter with available materials",
+          "fx": {
+            "radiation": 2,
+            "energy": -5
+          },
+          "why": "Shielding reduces additional exposure, but does not erase radiation already received."
+        },
+        {
+          "label": "B — Continue outdoor activities",
+          "fx": {
+            "energy": 5,
+            "radiation": 15
+          },
+          "why": "Outdoor tasks are completed, but the team is much more exposed."
+        },
+        {
+          "label": "C — Suspend outdoor activities and stay in the habitat",
+          "fx": {
+            "health": 3,
+            "food": -2
+          },
+          "why": "Staying protected allows rest, but uses food while we wait."
+        }
+      ],
+      "source": 2
+    },
+    {
+      "day": 3,
+      "title": "Oxygen production failure",
+      "npc": "andreas",
+      "situation": "The equipment that produces oxygen from gas in the Martian atmosphere has failed.",
+      "science": "The Martian atmosphere is mostly CO₂. NASA’s MOXIE experiment showed that CO₂ can be turned into oxygen.",
+      "choices": [
+        {
+          "label": "A — Use some of the oxygen reserve",
+          "fx": {
+            "oxygen": -5,
+            "health": 5
+          },
+          "why": "The reserve keeps the air breathable while the team organizes, but reduces supplies."
+        },
+        {
+          "label": "B — Try to repair the production machine",
+          "fx": {
+            "oxygen": 8,
+            "energy": -12
+          },
+          "why": "If the repair works, we recover oxygen, but fixing it takes a lot of energy."
+        },
+        {
+          "label": "C — Turn off secondary equipment and prioritize oxygen",
+          "fx": {
+            "oxygen": 8,
+            "health": -3
+          },
+          "why": "Prioritizing life support helps, but discomfort affects the team."
+        }
+      ],
+      "source": 3
+    },
+    {
+      "day": 4,
+      "title": "Critical water level",
+      "npc": "laika",
+      "situation": "Our water supply is falling. We need water to drink, cook and maintain hygiene.",
+      "science": "There is water ice on Mars, mainly at the poles and below ground. Water is also recycled on missions.",
+      "choices": [
+        {
+          "label": "A — Ration water immediately",
+          "fx": {
+            "water": 8,
+            "health": -5
+          },
+          "why": "Rationing makes supplies last longer, but drinking less harms health."
+        },
+        {
+          "label": "B — Repair the recycling system",
+          "fx": {
+            "water": 12,
+            "energy": -10
+          },
+          "why": "Recovering used water increases supplies, but the system consumes energy."
+        },
+        {
+          "label": "C — Send a small team to look for ice",
+          "fx": {
+            "water": 10,
+            "energy": -12,
+            "health": -3
+          },
+          "why": "Finding ice helps, but the trip uses energy and involves risks."
+        }
+      ],
+      "source": 5
+    },
+    {
+      "day": 5,
+      "title": "Silence from Earth",
+      "npc": "andreas",
+      "situation": "We sent a message asking for guidance, but the reply is taking a long time.",
+      "science": "Radio signals take about 3 to 22 minutes to travel from Mars to Earth. NASA uses the Deep Space Network to communicate with distant missions.",
+      "choices": [
+        {
+          "label": "A — Follow emergency protocols",
+          "fx": {
+            "energy": 5,
+            "health": 5
+          },
+          "why": "Procedures prepared in advance prevent improvisation and provide safety."
+        },
+        {
+          "label": "B — Wait for Earth’s reply before acting",
+          "fx": {
+            "energy": -5,
+            "food": -3
+          },
+          "why": "Waiting seems safer, but idle time consumes resources."
+        },
+        {
+          "label": "C — Use backup communication equipment",
+          "fx": {
+            "energy": -8,
+            "health": 5
+          },
+          "why": "The equipment may restore contact and reassure the team, but uses energy."
+        }
+      ],
+      "source": 6
+    },
+    {
+      "day": 6,
+      "title": "Carbon dioxide buildup",
+      "npc": "lina",
+      "situation": "A sensor shows that carbon dioxide (the gas we breathe out) is rising inside the habitat.",
+      "science": "In space habitats, CO₂ must be continuously removed from the air by life-support systems.",
+      "choices": [
+        {
+          "label": "A — Activate the backup filter",
+          "fx": {
+            "health": 8,
+            "energy": -10
+          },
+          "why": "The backup filter removes CO₂ from the air and protects the team, but uses energy."
+        },
+        {
+          "label": "B — Turn off secondary equipment and prioritize filters",
+          "fx": {
+            "energy": 5,
+            "health": 5
+          },
+          "why": "Reducing consumption keeps essential filters running."
+        },
+        {
+          "label": "C — Stay in the affected compartment",
+          "fx": {
+            "energy": 5,
+            "health": -12
+          },
+          "why": "This saves energy, but breathing air with too much CO₂ harms health."
+        }
+      ],
+      "source": 4
+    },
+    {
+      "day": 7,
+      "title": "Food supplies are shrinking",
+      "npc": "lina",
+      "situation": "Food must last until the end of the mission. How should we organize meals?",
+      "science": "NASA studies long-lasting food and even growing plants in space for long missions.",
+      "choices": [
+        {
+          "label": "A — Organize meals and control portions",
+          "fx": {
+            "food": 8,
+            "health": 3
+          },
+          "why": "Planning portions reduces waste and keeps the team fed."
+        },
+        {
+          "label": "B — Eat a full meal to recover energy",
+          "fx": {
+            "health": 10,
+            "food": -12
+          },
+          "why": "A nutritious meal helps well-being, but greatly reduces food supplies."
+        },
+        {
+          "label": "C — Save the most nutritious food",
+          "fx": {
+            "food": 5,
+            "health": -4
+          },
+          "why": "Saving food helps in an emergency, but eating less now weakens the team."
+        }
+      ],
+      "source": 7
+    },
+    {
+      "day": 8,
+      "title": "The habitat is too cold",
+      "npc": "andreas",
+      "situation": "The temperature inside the habitat is dropping. We need to keep the team warm.",
+      "science": "Mars has an average temperature of about −60 °C. It can get even colder at night.",
+      "choices": [
+        {
+          "label": "A — Increase habitat heating",
+          "fx": {
+            "health": 8,
+            "energy": -12
+          },
+          "why": "A suitable temperature protects health, but heating takes a lot of energy."
+        },
+        {
+          "label": "B — Turn off secondary equipment and keep heating on",
+          "fx": {
+            "energy": 8,
+            "health": 4
+          },
+          "why": "Saving energy on other equipment allows essential heating."
+        },
+        {
+          "label": "C — Wear thermal clothing and reduce heating a little",
+          "fx": {
+            "energy": 8,
+            "health": -3
+          },
+          "why": "Clothing helps conserve heat, but the team feels colder."
+        }
+      ],
+      "source": 1
+    },
+    {
+      "day": 9,
+      "title": "Habitat leak",
+      "npc": "andreas",
+      "situation": "An alarm indicates a loss of pressure in part of the habitat.",
+      "science": "Air pressure on Mars is less than 1% of Earth’s pressure. The habitat must stay well sealed.",
+      "choices": [
+        {
+          "label": "A — Isolate the leaking compartment",
+          "fx": {
+            "oxygen": 5,
+            "energy": -5
+          },
+          "why": "Closing passages stops air loss from affecting the entire habitat."
+        },
+        {
+          "label": "B — Repair the seal directly",
+          "fx": {
+            "oxygen": 10,
+            "health": -3
+          },
+          "why": "A successful repair reduces air loss, but is tiring and risky."
+        },
+        {
+          "label": "C — Move the team to another compartment",
+          "fx": {
+            "health": 5,
+            "oxygen": -5
+          },
+          "why": "Moving away from the damaged area protects people, but air keeps escaping."
+        }
+      ],
+      "source": 0
+    },
+    {
+      "day": 10,
+      "title": "The final great storm",
+      "npc": "laika",
+      "situation": "Another dust storm threatens our energy on the very day the support team arrives!",
+      "science": "Dust storms can cover the whole planet and last for weeks.",
+      "choices": [
+        {
+          "label": "A — Activate maximum energy-saving mode",
+          "fx": {
+            "energy": 12,
+            "health": -3
+          },
+          "why": "Turning off non-essential equipment conserves energy, but causes discomfort."
+        },
+        {
+          "label": "B — Use the emergency batteries",
+          "fx": {
+            "health": 8,
+            "energy": -20
+          },
+          "why": "Batteries provide heating and comfort, but exhaust the reserve."
+        },
+        {
+          "label": "C — Prioritize life support and reduce other systems",
+          "fx": {
+            "oxygen": 5,
+            "health": 5,
+            "energy": 5,
+            "food": -5
+          },
+          "why": "Directing resources to keep the team alive is balanced, but uses food."
+        }
+      ],
+      "source": 1
+    }
+  ],
+  "emergencies": [
+    {
+      "title": "Pressure loss during the night",
+      "time": 45,
+      "situation": "A small piece of space material hit the habitat and damaged a seal. Air is slowly escaping!",
+      "choices": [
+        {
+          "label": "A — Immediately isolate the damaged compartment",
+          "fx": {
+            "oxygen": -15,
+            "energy": -10,
+            "health": 5
+          },
+          "why": "This protects people, but some air is lost and systems work to keep the area isolated."
+        },
+        {
+          "label": "B — Repair the seal from inside",
+          "fx": {
+            "oxygen": 10,
+            "energy": -20,
+            "health": -10
+          },
+          "why": "The emergency repair controls the leak, but requires energy and is tiring."
+        },
+        {
+          "label": "C — Put on spacesuits and repair from outside",
+          "fx": {
+            "oxygen": 15,
+            "energy": -15,
+            "health": -20
+          },
+          "why": "This may solve it quickly, but going outside at night in an emergency is very risky."
+        }
+      ],
+      "source": 0,
+      "npc": "andreas"
+    },
+    {
+      "title": "Fire in the energy compartment",
+      "time": 30,
+      "situation": "A smoke alarm wakes the team! An electrical fault has started a fire in the battery compartment.",
+      "choices": [
+        {
+          "label": "A — Turn off power to the compartment and isolate it",
+          "fx": {
+            "energy": -25,
+            "health": 5
+          },
+          "why": "A safe decision, but an important part of the energy supply becomes unavailable."
+        },
+        {
+          "label": "B — Activate the fire suppression system",
+          "fx": {
+            "energy": -15,
+            "oxygen": -10,
+            "health": 15
+          },
+          "why": "This fights the fire and protects the team, but consumes energy and affects the air."
+        },
+        {
+          "label": "C — Try to save the batteries",
+          "fx": {
+            "energy": 15,
+            "health": -25,
+            "oxygen": -10
+          },
+          "why": "This may recover energy, but smoke and fire put everyone in great danger."
+        }
+      ],
+      "source": 4,
+      "npc": "andreas"
+    },
+    {
+      "title": "Contaminated water",
+      "time": 40,
+      "situation": "A sensor detected a contaminant in the water recycling system. Nobody can drink this water!",
+      "choices": [
+        {
+          "label": "A — Immediately turn off the recycling system",
+          "fx": {
+            "water": -25,
+            "health": 5
+          },
+          "why": "This protects health, but leaves less water until repairs."
+        },
+        {
+          "label": "B — Activate the backup filtration system",
+          "fx": {
+            "water": 15,
+            "energy": -20,
+            "health": 5
+          },
+          "why": "This recovers safe water, but needs a lot of energy."
+        },
+        {
+          "label": "C — Improvise a filter with available materials",
+          "fx": {
+            "water": 5,
+            "energy": -10,
+            "health": -15
+          },
+          "why": "This temporary solution is unreliable: untested water must not be considered safe to drink."
+        }
+      ],
+      "source": 4,
+      "npc": "laika"
+    }
+  ],
+  "npcs": {
+    "andreas": {
+      "name": "Andreas",
+      "role": "Aerospace engineer",
+      "quote": "In space, knowledge is as important as oxygen. We need to think before acting!"
+    },
+    "laika": {
+      "name": "Laika",
+      "role": "Biologist and astrobiologist",
+      "quote": "The universe is full of questions waiting to be answered. Shall we discover some together?"
+    },
+    "lina": {
+      "name": "Lina",
+      "role": "Space doctor",
+      "quote": "A great mission is only possible when we look after one another!"
+    }
+  },
+  "tasks": [
+    {
+      "name": "Reconnect electrical circuits",
+      "place": "Energy room",
+      "rewardText": "Energy +10",
+      "instructions": "Three wires (red, blue, yellow) on the left and three shuffled connectors on the right. Connect each wire to the connector of the same color; if you make a mistake, try again.",
+      "fact": "NASA’s Spirit and Opportunity rovers used solar panels. Martian dust reduced the energy they could capture.",
+      "id": "wires",
+      "reward": {
+        "energy": 10
+      },
+      "source": 8
+    },
+    {
+      "name": "Restart the oxygen generator",
+      "place": "Life-support laboratory",
+      "rewardText": "Oxygen +10",
+      "instructions": "A panel with a 4-digit code and a clue (e.g. “the last digit is twice the first”). A wrong answer resets the panel with a new clue.",
+      "fact": "MOXIE, carried by the Perseverance rover, demonstrated that oxygen can be produced from Martian CO₂.",
+      "id": "code",
+      "reward": {
+        "oxygen": 10
+      },
+      "source": 3
+    },
+    {
+      "name": "Align the communication antenna",
+      "place": "Communication station",
+      "rewardText": "Energy +5 and extra information",
+      "instructions": "Two controls (horizontal and vertical). A meter shows signal strength; reaching green (>92%) completes the task.",
+      "fact": "NASA uses the Deep Space Network, a network of large antennas around Earth, to communicate with missions on Mars.",
+      "id": "antenna",
+      "reward": {
+        "energy": 5
+      },
+      "source": 6
+    },
+    {
+      "name": "Clean the solar panels",
+      "place": "Outdoor area",
+      "rewardText": "Energy +15",
+      "instructions": "A panel with 64 dusty sectors (some need 2 passes). Clean 90% in 50 seconds. Wind gusts make clean sectors dusty again.",
+      "fact": "Spirit and Opportunity depended on solar energy; dust and the atmosphere reduced the energy available.",
+      "id": "solar",
+      "reward": {
+        "energy": 15
+      },
+      "source": 8
+    },
+    {
+      "name": "Collect a rock sample",
+      "place": "Exploration area",
+      "rewardText": "Scientific information + bonus",
+      "instructions": "A 7×7 grid with a robotic arm controlled by arrows. Forbidden areas send the arm back to the start. Drill over the rock and store it in the tube.",
+      "fact": "Perseverance’s robotic arm is about 2.1 meters long and studies rocks and collects samples on Mars.",
+      "id": "rock",
+      "reward": {
+        "health": 3
+      },
+      "source": 0
+    },
+    {
+      "name": "Organize water filtration",
+      "place": "Water treatment room",
+      "rewardText": "Water +10",
+      "instructions": "Four shuffled modules. Select in order: Water intake → Filtration → Quality check → Reservoir.",
+      "fact": "NASA develops life-support systems that recover, monitor, treat and store water for long missions.",
+      "id": "water",
+      "reward": {
+        "water": 10
+      },
+      "source": 4
+    },
+    {
+      "name": "Plot a safe rover route",
+      "place": "Navigation room",
+      "rewardText": "Food +5",
+      "instructions": "A 6×6 grid map. Plot a route one square at a time from A to B, avoiding craters, within 60 seconds.",
+      "fact": "Martian rovers use cameras and autonomous navigation to identify obstacles and avoid dangerous terrain.",
+      "id": "route",
+      "reward": {
+        "food": 5
+      },
+      "source": 8
+    },
+    {
+      "name": "Check the spacesuit",
+      "place": "Equipment room",
+      "rewardText": "Health +10",
+      "instructions": "Match four components (oxygen, ventilation, CO₂ removal, communication) to their functions; then press TEST.",
+      "fact": "A spacesuit supplies oxygen, removes exhaled CO₂, circulates air, provides electricity and enables communication.",
+      "id": "suit",
+      "reward": {
+        "health": 10
+      },
+      "source": 4
+    },
+    {
+      "name": "Catalog and store samples",
+      "place": "Analysis laboratory",
+      "rewardText": "Scientific information + Health +5",
+      "instructions": "Place three tubes with similar codes (MRS-0418, MRS-0481, MRS-4018) in the correct compartment according to the table.",
+      "fact": "Perseverance stores samples in sealed tubes and can leave them on the surface for a future mission to retrieve.",
+      "id": "samples",
+      "reward": {
+        "health": 5
+      },
+      "source": 0
+    }
+  ],
+  "sources": [
+    {
+      "title": "NASA — Mars Facts",
+      "url": "https://science.nasa.gov/mars/facts/"
+    },
+    {
+      "title": "NASA — Mars Weather",
+      "url": "https://science.nasa.gov/mars/facts/"
+    },
+    {
+      "title": "NASA — Radiation Assessment Detector (RAD)",
+      "url": "https://mars.nasa.gov/msl/mission/instruments/rad/"
+    },
+    {
+      "title": "NASA — MOXIE completes its Mars mission",
+      "url": "https://www.nasa.gov/missions/mars-2020-perseverance/mars-perseverance-rover/nasas-oxygen-generating-experiment-moxie-completes-mars-mission/"
+    },
+    {
+      "title": "NASA — Environmental Control and Life Support Systems (ECLSS)",
+      "url": "https://www.nasa.gov/reference/environmental-control-and-life-support-systems-eclss/"
+    },
+    {
+      "title": "NASA — Mars Water Ice Mapping",
+      "url": "https://www.nasa.gov/solar-system/nasas-treasure-map-for-water-ice-on-mars/"
+    },
+    {
+      "title": "NASA — 7 Things to Know About Space Communications",
+      "url": "https://www.nasa.gov/centers-and-facilities/goddard/space-communications-7-things-you-need-to-know/"
+    },
+    {
+      "title": "NASA — Space Food",
+      "url": "https://www.nasa.gov/directorates/esdmd/hhp/space-food-systems/"
+    },
+    {
+      "title": "NASA — Spirit and Opportunity",
+      "url": "https://science.nasa.gov/mission/mars-exploration-rovers-spirit-and-opportunity/"
+    }
+  ],
+  "losses": {
+    "oxygen": {
+      "text": "Our bodies need oxygen to function. The atmosphere of Mars is mostly carbon dioxide, so we cannot breathe it. Without reserves and systems supplying breathable air, the team must stop the mission.",
+      "source": 3
+    },
+    "water": {
+      "text": "The team needs water to drink and prepare food. Used water is recovered and treated at the base. When supplies run out, this cycle cannot meet the team’s needs and the mission must stop.",
+      "source": 4
+    },
+    "food": {
+      "text": "Astronauts need food to meet their nutritional needs during a mission. Without food reserves, the team cannot continue safely. In this simulation, food reaching zero interrupts the mission.",
+      "source": 7
+    },
+    "energy": {
+      "text": "The base needs electricity to operate its equipment and life-support systems. Dust storms on Mars can reduce the sunlight available to solar panels. In this simulation, energy reaching zero means the base can no longer support a safe mission.",
+      "source": 8
+    },
+    "radiation": {
+      "text": "Mars has a thin atmosphere and no strong global magnetic field, leaving the team exposed to energetic particles. Radiation exposure can endanger astronauts’ health. In this simulation, 100% radiation is the safety limit that interrupts the mission, not a real-world dose measurement.",
+      "source": 2
+    },
+    "health": {
+      "text": "Surviving in space requires several kinds of care at once: breathable air, safe water, food and temperature control. When these systems stop protecting the team, health is at risk. In the game, zero health represents this limit.",
+      "source": 4
+    }
+  },
+  "creators": [
+    "Ana Laura Caixeta",
+    "Karolyne Magalhães",
+    "Luisa Teixeira",
+    "Mariana Zanon",
+    "Rayssa Pereira",
+    "Sarah Emannuela"
+  ]
+}

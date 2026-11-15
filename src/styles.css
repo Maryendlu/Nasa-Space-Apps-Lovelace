@@ -1,0 +1,3275 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * - Keep every @import in this top block, above @theme and the rest of the file. Install an
+ *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
+ *   build resolves @import from the filesystem. Load those with a <link> in the head() of
+ *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The design lives in this file: oklch color tokens on the shadcn variables
+ * (--background, --foreground, --primary, --secondary, --muted, --accent, ...) plus
+ * new tokens as needed, font tokens, and custom styles and animations.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-display: "Orbitron", system-ui, sans-serif;
+  --font-sans: "Nunito", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.212 0.112 290);
+  --foreground: oklch(0.97 0.012 300);
+  --card: oklch(0.255 0.12 290);
+  --card-foreground: oklch(0.97 0.012 300);
+  --popover: oklch(0.255 0.12 290);
+  --popover-foreground: oklch(0.97 0.01 90);
+  --primary: oklch(0.445 0.238 298);
+  --primary-foreground: oklch(0.99 0.003 300);
+  --secondary: oklch(0.775 0.165 315);
+  --secondary-foreground: oklch(0.212 0.112 290);
+  --muted: oklch(0.29 0.12 290);
+  --muted-foreground: oklch(0.76 0.065 300);
+  --accent: oklch(0.775 0.165 315);
+  --accent-foreground: oklch(0.212 0.112 290);
+  --destructive: oklch(0.53 0.17 22);
+  --destructive-foreground: oklch(0.97 0.01 90);
+  --border: oklch(0.43 0.16 295);
+  --input: oklch(0.43 0.16 295);
+  --ring: oklch(0.775 0.165 315);
+  --chart-1: oklch(0.75 0.17 55);
+  --chart-2: oklch(0.78 0.12 190);
+  --chart-3: oklch(0.88 0.15 95);
+  --chart-4: oklch(0.7 0.15 330);
+  --chart-5: oklch(0.65 0.2 25);
+  --sidebar: oklch(0.23 0.06 270);
+  --sidebar-foreground: oklch(0.97 0.01 90);
+  --sidebar-primary: oklch(0.75 0.17 55);
+  --sidebar-primary-foreground: oklch(0.17 0.05 270);
+  --sidebar-accent: oklch(0.27 0.05 270);
+  --sidebar-accent-foreground: oklch(0.97 0.01 90);
+  --sidebar-border: oklch(0.35 0.06 270);
+  --sidebar-ring: oklch(0.75 0.17 55);
+  --mars-red: oklch(0.53 0.17 22);
+  --mars-deep: oklch(0.405 0.145 27);
+  --success: oklch(0.78 0.15 155);
+  --science: oklch(0.8 0.115 220);
+  --warning: oklch(0.86 0.15 90);
+  --danger: oklch(0.73 0.19 23);
+  --wire-blue: oklch(0.73 0.17 250);
+  --shadow-panel: 0 12px 32px color-mix(in oklab, var(--background) 65%, transparent);
+  --hero-shade: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--background) 98%, transparent) 0%,
+    color-mix(in oklab, var(--background) 85%, transparent) 35%,
+    color-mix(in oklab, var(--background) 5%, transparent) 75%
+  );
+  --gradient-sky: radial-gradient(ellipse at top, oklch(0.3 0.09 280), var(--background) 65%);
+  --shadow-glow: 0 12px 40px -12px color-mix(in oklab, var(--primary) 60%, transparent);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
+
+@utility bg-sky {
+  background: var(--gradient-sky);
+}
+@utility shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+@utility font-display {
+  font-family: var(--font-display);
+}
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+@utility animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+/* Mars Academy: original purple pixel-art palette from Design.pdf. */
+.mars-app {
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+  background: var(--background);
+}
+.mars-app h1,
+.mars-app h2,
+.mars-app h3 {
+  letter-spacing: 0;
+}
+.mars-app h1 {
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1.4;
+  font-weight: 800;
+}
+.mars-app h2 {
+  font-size: 25px;
+  line-height: 1.4;
+  font-weight: 800;
+}
+.mars-app p {
+  line-height: 1.65;
+}
+.mars-app button {
+  letter-spacing: 0;
+}
+.academy-header {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 5%;
+  border-bottom: 1px solid var(--border);
+}
+.academy-wordmark {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 16px;
+}
+.academy-wordmark svg {
+  width: 28px;
+  height: 28px;
+  color: var(--secondary);
+}
+.academy-wordmark b {
+  color: var(--secondary);
+}
+.header-mission {
+  color: var(--muted-foreground);
+  font-size: 11px;
+  font-weight: 800;
+}
+.header-mission span {
+  margin: 0 12px;
+  color: var(--border);
+}
+.academy-header button {
+  color: var(--muted-foreground);
+}
+.game-content {
+  min-height: calc(100vh - 150px);
+}
+.mars-app:has(.hud) .game-content {
+  min-height: calc(100vh - 310px);
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--secondary);
+  font-size: 11px;
+  font-weight: 900;
+}
+.live-dot,
+.location-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--success);
+  border-radius: 50%;
+}
+.intro-scene {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: max(600px, min(820px, calc(100svh - 185px)));
+  overflow: hidden;
+}
+.intro-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  image-rendering: pixelated;
+}
+.intro-shade {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-shade);
+}
+.intro-copy {
+  position: relative;
+  flex-shrink: 0;
+  padding-bottom: 32px;
+  width: min(590px, 65%);
+  margin-left: 7%;
+  padding-top: 85px;
+}
+.intro-copy h1 {
+  font-size: 68px;
+  line-height: 1.18;
+  margin: 22px 0 8px;
+}
+.intro-copy h1 span {
+  color: var(--secondary);
+}
+.intro-subtitle {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--foreground);
+  margin-top: 10px;
+}
+.intro-description {
+  max-width: 405px;
+  color: var(--muted-foreground);
+  margin: 25px 0 30px;
+  font-size: 17px;
+}
+.start-button {
+  height: 58px;
+  padding: 0 28px;
+  font-size: 16px;
+  font-weight: 900;
+  border: 2px solid var(--secondary);
+  border-bottom-width: 5px;
+  border-radius: 5px;
+  background: var(--primary);
+  box-shadow: var(--shadow-panel);
+  gap: 15px;
+}
+.start-button svg:last-child {
+  margin-left: 18px;
+}
+.adjustment-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.adjustment-toggle input {
+  accent-color: var(--secondary);
+  width: 16px;
+  height: 16px;
+}
+.intro-footer {
+  position: relative;
+  margin-top: auto;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 7%;
+  font-size: 10px;
+  font-weight: 900;
+  background: color-mix(in oklab, var(--background) 88%, transparent);
+  border-top: 1px solid var(--border);
+  color: var(--secondary);
+}
+.intro-story {
+  padding: 50px 7% 65px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 70px;
+  border-top: 1px solid var(--border);
+}
+.intro-story h2 {
+  margin-top: 15px;
+}
+.intro-story p {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+.intro-story p span {
+  color: var(--secondary);
+  font-weight: 900;
+}
+.selection-screen,
+.team-screen {
+  max-width: 1050px;
+  margin: auto;
+  text-align: center;
+  padding: 55px 30px 65px;
+}
+.selection-screen h1,
+.team-screen h1 {
+  margin: 15px 0;
+}
+.selection-screen > p {
+  color: var(--muted-foreground);
+}
+.character-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 760px;
+  margin: 35px auto;
+  gap: 26px;
+}
+.character-choice {
+  height: auto;
+  min-height: 410px;
+  padding: 24px 25px;
+  display: flex;
+  flex-direction: column;
+  white-space: normal;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  position: relative;
+}
+.character-choice.chosen {
+  border-color: var(--secondary);
+  box-shadow: inset 0 -4px var(--secondary);
+}
+.character-choice:hover {
+  background: var(--muted);
+  color: var(--foreground);
+}
+.character-choice img {
+  height: 205px;
+  max-width: 160px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.character-choice strong {
+  font-size: 26px;
+  font-family: var(--font-display);
+  margin: 10px 0;
+}
+.character-choice > span:not(.character-number):not(.selection-mark) {
+  color: var(--secondary);
+  font-size: 12px;
+}
+.character-choice q {
+  margin: 12px 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+.character-number {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+.selection-mark {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 900;
+  margin-top: 10px;
+}
+.primary-action {
+  height: 48px;
+  padding: 0 25px;
+  font-size: 14px;
+  font-weight: 800;
+  background: var(--primary);
+  border: 1px solid var(--secondary);
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin: 45px 0;
+}
+.team-member img {
+  height: 210px;
+  max-width: 160px;
+  object-fit: contain;
+  margin: auto;
+  image-rendering: pixelated;
+}
+.team-member h2 {
+  margin-top: 20px;
+}
+.team-member > span {
+  color: var(--secondary);
+  font-size: 13px;
+}
+.team-member p {
+  margin-top: 15px;
+  font-size: 14px;
+  color: var(--muted-foreground);
+}
+.hud {
+  display: grid;
+  grid-template-columns: 90px repeat(6, 1fr);
+  align-items: center;
+  gap: 20px;
+  padding: 20px 5%;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.hud-day {
+  border-right: 1px solid var(--border);
+}
+.hud-day > span {
+  font-size: 10px;
+  color: var(--secondary);
+  font-weight: 900;
+  display: block;
+}
+.hud-day strong {
+  font-family: var(--font-display);
+  font-size: 25px;
+}
+.hud-day small {
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.hud-stat > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+.hud-stat svg {
+  width: 14px;
+  height: 14px;
+  color: var(--secondary);
+}
+.hud-stat strong {
+  margin-left: auto;
+  font-size: 14px;
+}
+.hud-stat small {
+  color: var(--muted-foreground);
+  font-size: 9px;
+}
+progress {
+  width: 100%;
+  height: 5px;
+  border: 0;
+  background: var(--muted);
+  border-radius: 2px;
+  overflow: hidden;
+}
+progress::-webkit-progress-bar {
+  background: var(--muted);
+}
+progress::-webkit-progress-value {
+  background: var(--secondary);
+}
+progress::-moz-progress-bar {
+  background: var(--secondary);
+}
+.stat-water progress::-webkit-progress-value,
+.stat-oxygen progress::-webkit-progress-value {
+  background: var(--science);
+}
+.stat-food progress::-webkit-progress-value,
+.stat-health progress::-webkit-progress-value {
+  background: var(--success);
+}
+.stat-energy progress::-webkit-progress-value {
+  background: var(--warning);
+}
+.stat-radiation progress::-webkit-progress-value {
+  background: var(--mars-red);
+}
+.at-risk {
+  color: var(--danger);
+  animation: risk-pulse 2s infinite;
+}
+.day-screen,
+.result-screen,
+.emergency-screen,
+.end-screen,
+.task-screen,
+.night-screen {
+  max-width: 1050px;
+  padding: 35px 30px 90px;
+  margin: auto;
+}
+.mission-banner h1 {
+  margin: 10px 0;
+  font-size: 29px;
+}
+.mission-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.day-scenery {
+  height: 230px;
+  overflow: hidden;
+  margin-top: 25px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.day-scenery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+.dialogue {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  padding: 20px 25px;
+  border: 2px solid var(--border);
+  border-bottom-width: 4px;
+  background: var(--card);
+  border-radius: 5px;
+  margin: 25px 0;
+  box-shadow: var(--shadow-panel);
+}
+.dialogue > img {
+  width: 72px;
+  height: 112px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+.dialogue > div {
+  flex: 1;
+  min-width: 0;
+}
+.dialogue-name {
+  font-weight: 900;
+  font-size: 17px;
+  color: var(--secondary);
+}
+.dialogue-name small {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  margin-left: 12px;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+.dialogue-text p {
+  font-size: 16px;
+  margin-top: 8px;
+}
+.choice-heading {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 800;
+  margin: 25px 0 15px;
+}
+.choice-heading span:last-child {
+  font-size: 10px;
+  color: var(--muted-foreground);
+}
+.daily-choices {
+  display: grid;
+  gap: 12px;
+}
+.decision-button {
+  min-height: 66px;
+  height: auto;
+  justify-content: flex-start;
+  padding: 12px 20px 12px 13px;
+  white-space: normal;
+  text-align: left;
+  background: var(--card);
+  border-color: var(--border);
+  font-size: 14px;
+  line-height: 1.5;
+  gap: 18px;
+}
+.decision-button:hover {
+  background: var(--muted);
+  color: var(--foreground);
+  border-color: var(--secondary);
+}
+.choice-letter {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--secondary);
+  font-family: var(--font-display);
+}
+.decision-button > svg {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--secondary);
+}
+.weather-report {
+  display: flex;
+  gap: 15px;
+  padding: 20px;
+  background: color-mix(in oklab, var(--warning) 8%, var(--card));
+  border: 1px solid var(--warning);
+  border-radius: 4px;
+  font-size: 13px;
+}
+.weather-report > svg {
+  flex-shrink: 0;
+  color: var(--warning);
+}
+.weather-report small {
+  color: var(--muted-foreground);
+}
+.result-screen h1,
+.end-screen h1 {
+  margin: 15px 0 20px;
+}
+.result-screen h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.effects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+.effect {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.effect svg {
+  width: 14px;
+  height: 14px;
+}
+.gain {
+  color: var(--success);
+  background: color-mix(in oklab, var(--success) 12%, var(--background));
+}
+.loss {
+  color: var(--danger);
+  background: color-mix(in oklab, var(--danger) 12%, var(--background));
+}
+.science-note {
+  display: flex;
+  gap: 18px;
+  padding: 22px;
+  margin: 25px 0;
+  border-left: 3px solid var(--science);
+  background: color-mix(in oklab, var(--science) 8%, var(--background));
+}
+.science-note > svg {
+  width: 23px;
+  height: 23px;
+  color: var(--science);
+  flex-shrink: 0;
+}
+.science-note h3 {
+  color: var(--science);
+  font-weight: 800;
+}
+.science-note p {
+  margin: 8px 0 14px;
+  font-size: 15px;
+}
+.science-source {
+  color: var(--science);
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.crew-reaction {
+  color: var(--secondary);
+  font-style: italic;
+}
+.night-heading {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 22px;
+}
+.night-heading h2 {
+  font-family: var(--font-display);
+  margin-top: 8px;
+}
+.night-heading > span {
+  margin-left: auto;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.base-map {
+  width: 100%;
+  aspect-ratio: 1.55;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  background: var(--card);
+  position: relative;
+  overflow: hidden;
+  cursor: crosshair;
+  touch-action: manipulation;
+}
+.map-scenery {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.42) saturate(0.85);
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+.map-path {
+  position: absolute;
+  border: 15px solid color-mix(in oklab, var(--secondary) 16%, transparent);
+  border-radius: 18%;
+  pointer-events: none;
+}
+.map-path-one {
+  inset: 17% 10% 15%;
+}
+.map-path-two {
+  inset: 37% 30% 32%;
+  border-width: 12px;
+}
+.station {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: auto;
+  min-height: 66px;
+  flex-direction: column;
+  gap: 5px;
+  padding: 9px 6px;
+  background: color-mix(in oklab, var(--background) 95%, transparent);
+  border: 1px solid var(--secondary);
+  white-space: normal;
+}
+.station span {
+  color: var(--secondary);
+}
+.station small {
+  font-size: 9px;
+  line-height: 1.3;
+  color: var(--foreground);
+  font-weight: 800;
+}
+.station:hover {
+  background: var(--primary);
+  color: var(--foreground);
+}
+.station.complete {
+  border-color: var(--success);
+}
+.station.complete span {
+  color: var(--success);
+}
+.station-0 {
+  left: 12%;
+  top: 25%;
+}
+.station-1 {
+  left: 39%;
+  top: 20%;
+}
+.station-2 {
+  left: 75%;
+  top: 19%;
+}
+.station-3 {
+  left: 89%;
+  top: 48%;
+}
+.station-4 {
+  left: 82%;
+  top: 78%;
+}
+.station-5 {
+  left: 56%;
+  top: 78%;
+}
+.station-6 {
+  left: 32%;
+  top: 77%;
+}
+.station-7 {
+  left: 14%;
+  top: 64%;
+}
+.station-8 {
+  left: 53%;
+  top: 45%;
+}
+.map-player {
+  position: absolute;
+  width: 44px;
+  height: 58.67px;
+  overflow: hidden;
+  transform: translate(-50%, -85%);
+  image-rendering: pixelated;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.player-sprites {
+  position: absolute;
+  height: 400%;
+  width: 400%;
+  max-width: none;
+  left: 0;
+  top: 0;
+  object-fit: fill;
+  image-rendering: pixelated;
+}
+
+@keyframes sprite-steps {
+  from {
+    left: 0;
+  }
+  to {
+    left: -400%;
+  }
+}
+.map-bottom {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  min-height: 100px;
+  padding-top: 16px;
+}
+.direction-pad {
+  display: flex;
+  gap: 7px;
+  flex-shrink: 0;
+}
+.direction-pad button {
+  background: var(--card);
+}
+.nearby-task {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-left: auto;
+}
+.nearby-task > div {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  gap: 5px;
+}
+.nearby-task span {
+  color: var(--success);
+}
+.nearby-task button {
+  font-size: 12px;
+}
+.inventory {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 35;
+}
+.inventory-trigger {
+  height: 46px;
+  background: var(--card);
+  border: 1px solid var(--secondary);
+  box-shadow: var(--shadow-panel);
+}
+.inventory-trigger strong {
+  min-width: 22px;
+  text-align: center;
+  color: var(--secondary);
+}
+.inventory-panel {
+  position: absolute;
+  bottom: 58px;
+  right: 0;
+  width: 320px;
+  max-height: 60vh;
+  overflow: auto;
+  background: var(--popover);
+  border: 2px solid var(--border);
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: var(--shadow-panel);
+}
+.inventory-panel h2 {
+  font-size: 18px;
+}
+.inventory-panel p {
+  font-size: 12px;
+  color: var(--muted-foreground);
+  margin: 15px 0;
+}
+.inventory-item {
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+  font-size: 12px;
+}
+.inventory-item .effects {
+  margin: 8px 0;
+}
+.inventory-item .effect {
+  font-size: 10px;
+  padding: 4px 7px;
+}
+.task-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.task-heading h2 {
+  margin-top: 10px;
+  font-size: 25px;
+}
+.timer {
+  display: block;
+  color: var(--secondary);
+  font: 800 24px var(--font-display);
+  flex-shrink: 0;
+}
+.timer.danger {
+  color: var(--danger);
+}
+.task-instructions {
+  margin: 20px 0 30px;
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+.task-message {
+  min-height: 30px;
+  color: var(--secondary);
+  font-size: 14px;
+  margin: 20px 0;
+}
+.wire-board {
+  display: flex;
+  justify-content: space-between;
+  max-width: 650px;
+  margin: 35px auto;
+}
+.wire-board > div {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.wire {
+  background: var(--card);
+  min-width: 170px;
+  height: 55px;
+  justify-content: flex-start;
+}
+.wire-dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.wire-0 {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+.wire-1 {
+  color: var(--wire-blue);
+  border-color: var(--wire-blue);
+}
+.wire-2 {
+  color: var(--warning);
+  border-color: var(--warning);
+}
+.wire.selected {
+  outline: 3px solid currentColor;
+  outline-offset: 4px;
+}
+.code-board,
+.antenna-board,
+.solar-board,
+.robot-board,
+.water-board,
+.route-board,
+.matching-board {
+  max-width: 600px;
+  margin: 25px auto;
+}
+.code-board label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 25px 0;
+  font-size: 13px;
+}
+.code-board input {
+  width: 210px;
+  height: 64px;
+  padding: 12px;
+  font: 700 30px var(--font-display);
+  text-align: center;
+  color: var(--foreground);
+  border: 1px solid var(--secondary);
+  background: var(--card);
+  border-radius: 4px;
+}
+.antenna-board label {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+  font-size: 13px;
+}
+.antenna-board input {
+  accent-color: var(--secondary);
+}
+.signal-number {
+  font: 800 48px var(--font-display);
+  text-align: center;
+  color: var(--science);
+  margin: 30px 0;
+}
+.signal-number.signal-good {
+  color: var(--success);
+}
+.dust-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+  touch-action: none;
+  max-width: 430px;
+  margin: auto;
+}
+.dust-cell {
+  aspect-ratio: 1;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  padding: 0;
+  border-radius: 2px;
+}
+.dust-0 {
+  background: var(--science);
+  color: var(--background);
+}
+.dust-1 {
+  background: var(--mars-red);
+  color: var(--warning);
+}
+.dust-2 {
+  background: var(--mars-deep);
+  color: var(--warning);
+}
+.robot-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  max-width: 340px;
+  margin: 0 auto 20px;
+}
+.robot-grid span {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  background: var(--muted);
+  color: var(--secondary);
+  font-size: 25px;
+}
+.blocked {
+  background: var(--mars-deep) !important;
+  color: var(--danger) !important;
+}
+.robot-board {
+  text-align: center;
+}
+.robot-board .direction-pad {
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.robot-board > button {
+  margin: 6px;
+}
+.task-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.task-options button {
+  height: 60px;
+  white-space: normal;
+  background: var(--card);
+}
+.water-board ol {
+  min-height: 90px;
+  list-style: decimal;
+  padding-left: 25px;
+  margin: 20px 0;
+  color: var(--science);
+}
+.rover-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+  width: 360px;
+  max-width: 100%;
+  margin: auto;
+}
+.rover-grid button {
+  aspect-ratio: 1;
+  height: auto;
+  background: var(--muted);
+  font-size: 25px;
+  color: var(--secondary);
+}
+.rover-grid .rover-current {
+  background: var(--science);
+  color: var(--background);
+}
+.route-board {
+  text-align: center;
+}
+.route-board > button {
+  margin-top: 20px;
+}
+.matching-board label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 15px 0;
+  font-size: 14px;
+}
+.matching-board select {
+  background: var(--card);
+  color: var(--foreground);
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  width: 62%;
+}
+.sample-key {
+  border-left: 2px solid var(--science);
+  padding-left: 15px;
+  color: var(--science);
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+.emergency-active {
+  animation: emergency-flash 2s infinite;
+}
+.emergency-screen {
+  border-top: 4px solid var(--danger);
+}
+.emergency-screen .eyebrow {
+  color: var(--danger);
+}
+.emergency-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  margin: 20px 0;
+}
+.emergency-title h1 {
+  font-size: 27px;
+}
+.emergency-title strong {
+  color: var(--danger);
+  font: 800 48px var(--font-display);
+}
+.emergency-title small {
+  display: block;
+  font: 700 10px var(--font-sans);
+  text-align: center;
+}
+.emergency-screen > progress {
+  height: 8px;
+}
+.emergency-screen > progress::-webkit-progress-value {
+  background: var(--danger);
+}
+.emergency-screen .dialogue {
+  border-color: var(--danger);
+}
+.mission-journal {
+  margin: 25px 0;
+  border-top: 1px solid var(--border);
+}
+.mission-journal article {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.mission-journal article > span {
+  display: block;
+  font-size: 12px;
+  color: var(--secondary);
+  margin-bottom: 7px;
+}
+.mission-journal strong {
+  font-size: 14px;
+}
+.mission-journal p {
+  font-size: 13px;
+  color: var(--muted-foreground);
+  margin-top: 8px;
+}
+.end-screen > p {
+  margin: 15px 0;
+  color: var(--muted-foreground);
+}
+.save-earth {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: var(--success);
+  margin: 30px 0;
+}
+.end-actions {
+  display: flex;
+  gap: 15px;
+}
+.credits-screen {
+  text-align: center;
+  padding: 20px 25px;
+}
+.credits-window {
+  height: calc(100svh - 210px);
+  min-height: 400px;
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(
+    transparent,
+    var(--foreground) 12%,
+    var(--foreground) 85%,
+    transparent
+  );
+}
+.credits-roll {
+  padding-top: 50px;
+  animation: credits-scroll 55s linear infinite;
+}
+.credits-roll > svg {
+  margin: auto;
+  width: 48px;
+  height: 48px;
+  color: var(--secondary);
+}
+.credits-roll h1 {
+  color: var(--secondary);
+  margin: 25px 0;
+}
+.credits-roll h2 {
+  margin: 35px 0;
+  color: var(--success);
+}
+.credits-roll h3 {
+  color: var(--secondary);
+  margin: 60px 0 25px;
+  font-size: 12px;
+  font-weight: 900;
+}
+.credits-roll p {
+  margin: 20px 0;
+  font-size: 19px;
+}
+.credits-roll a {
+  color: var(--science);
+  font-size: 15px;
+}
+.credits-screen > button {
+  margin: 10px;
+}
+.academy-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid var(--border);
+  padding: 22px 5%;
+  font-size: 10px;
+  color: var(--muted-foreground);
+}
+.mars-app:has(.inventory) .academy-footer {
+  padding-right: 210px;
+}
+.academy-footer > span:first-child {
+  font-weight: 900;
+  color: var(--secondary);
+}
+.game-toast {
+  position: fixed;
+  bottom: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: var(--popover);
+  border: 1px solid var(--success);
+  padding: 15px 20px;
+  border-radius: 4px;
+  z-index: 50;
+  font-size: 13px;
+  max-width: 90%;
+}
+.game-toast svg {
+  color: var(--success);
+  flex-shrink: 0;
+}
+.diary-overlay {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in oklab, var(--background) 90%, transparent);
+  display: grid;
+  place-items: center;
+  z-index: 60;
+  padding: 20px;
+}
+.diary-overlay section {
+  padding: 30px;
+  width: 600px;
+  max-width: 100%;
+  max-height: 80vh;
+  overflow: auto;
+  background: var(--popover);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+}
+.diary-overlay p {
+  font-size: 13px;
+  margin: 15px 0;
+}
+@keyframes walk-bob {
+  50% {
+    transform: translate(-50%, -88%) rotate(3deg);
+  }
+}
+@keyframes risk-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+@keyframes emergency-flash {
+  50% {
+    box-shadow: inset 0 0 130px color-mix(in oklab, var(--danger) 30%, transparent);
+    background: color-mix(in oklab, var(--mars-red) 18%, var(--background));
+  }
+}
+@keyframes credits-scroll {
+  from {
+    transform: translateY(300px);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+@media (max-width: 1000px) {
+  .hud {
+    gap: 12px;
+    padding: 15px 3%;
+    grid-template-columns: 65px repeat(6, 1fr);
+  }
+  .hud-stat > div {
+    flex-wrap: wrap;
+  }
+  .hud-stat strong {
+    width: 100%;
+    margin: 0;
+  }
+  .hud-stat svg {
+    width: 12px;
+  }
+  .hud-day strong {
+    font-size: 22px;
+  }
+  .intro-copy h1 {
+    font-size: 56px;
+  }
+  .intro-copy {
+    padding-top: 70px;
+  }
+  .intro-scene {
+    min-height: 610px;
+  }
+  .intro-story {
+    gap: 40px;
+  }
+}
+@media (max-width: 640px) {
+  .mars-app:has(.inventory) .academy-footer {
+    padding-right: 20px;
+    padding-bottom: 80px;
+  }
+  .academy-header {
+    min-height: 62px;
+    padding: 14px 20px;
+  }
+  .academy-wordmark {
+    font-size: 12px;
+    gap: 8px;
+  }
+  .academy-wordmark svg {
+    width: 22px;
+  }
+  .header-mission {
+    display: none;
+  }
+  .intro-scene {
+    min-height: max(600px, min(740px, calc(100svh - 130px)));
+  }
+  .intro-background {
+    object-position: 62% center;
+  }
+  .intro-shade {
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--background) 90%, transparent),
+      color-mix(in oklab, var(--background) 55%, transparent) 65%,
+      var(--background)
+    );
+  }
+  .intro-copy {
+    padding-top: 55px;
+    width: auto;
+    margin: 0 26px;
+  }
+  .intro-copy h1 {
+    font-size: 44px;
+    margin: 25px 0 12px;
+  }
+  .intro-subtitle {
+    font-size: 20px;
+  }
+  .intro-description {
+    font-size: 15px;
+    max-width: 320px;
+    margin: 25px 0;
+  }
+  .start-button {
+    height: 52px;
+    font-size: 14px;
+    padding: 0 22px;
+  }
+  .intro-footer {
+    padding: 18px 25px;
+    font-size: 8px;
+    gap: 15px;
+  }
+  .intro-footer span:last-child {
+    display: none;
+  }
+  .intro-story {
+    display: block;
+    padding: 30px 25px;
+  }
+  .intro-story h2 {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  .intro-story p {
+    font-size: 13px;
+  }
+  .selection-screen,
+  .team-screen {
+    padding: 35px 18px 65px;
+  }
+  .mars-app h1 {
+    font-size: 25px;
+  }
+  .character-grid {
+    gap: 12px;
+    margin: 25px auto;
+  }
+  .character-choice {
+    padding: 15px 10px;
+    min-height: 370px;
+  }
+  .character-choice img {
+    height: 145px;
+    max-width: 105px;
+  }
+  .character-choice strong {
+    font-size: 19px;
+  }
+  .character-choice q {
+    font-size: 11px;
+  }
+  .character-choice > span:not(.character-number):not(.selection-mark) {
+    font-size: 10px;
+  }
+  .character-number {
+    font-size: 10px;
+    left: 10px;
+  }
+  .selection-mark {
+    font-size: 10px;
+  }
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    margin: 30px 0;
+  }
+  .team-member img {
+    height: 160px;
+  }
+  .team-member p {
+    max-width: 320px;
+    margin: 15px auto;
+  }
+  .hud {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 10px 18px;
+    gap: 8px 15px;
+    position: relative;
+  }
+  .hud-day {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 0;
+  }
+  .hud-day strong {
+    font-size: 18px;
+  }
+  .hud-day > span {
+    font-size: 9px;
+  }
+  .hud-stat > div {
+    flex-wrap: nowrap;
+    font-size: 9px;
+  }
+  .hud-stat strong {
+    width: auto;
+    margin-left: auto;
+    font-size: 12px;
+  }
+  .hud-stat svg {
+    display: none;
+  }
+  .hud-stat small {
+    font-size: 8px;
+  }
+  .day-screen,
+  .result-screen,
+  .emergency-screen,
+  .end-screen,
+  .task-screen,
+  .night-screen {
+    padding: 25px 18px 95px;
+  }
+  .mission-banner h1 {
+    font-size: 23px;
+  }
+  .day-scenery {
+    height: 155px;
+    margin-top: 18px;
+  }
+  .dialogue {
+    gap: 12px;
+    padding: 15px 12px;
+    margin: 18px 0;
+  }
+  .dialogue > img {
+    width: 48px;
+    height: 80px;
+  }
+  .dialogue-name {
+    font-size: 14px;
+  }
+  .dialogue-name small {
+    display: block;
+    margin: 3px 0 0;
+    font-size: 9px;
+  }
+  .dialogue-text p {
+    font-size: 13px;
+  }
+  .choice-heading {
+    font-size: 12px;
+  }
+  .choice-heading span:last-child {
+    display: none;
+  }
+  .decision-button {
+    font-size: 12px;
+    gap: 10px;
+    min-height: 65px;
+    padding: 11px;
+  }
+  .choice-letter {
+    width: 29px;
+    height: 33px;
+  }
+  .science-note {
+    padding: 16px 14px;
+    gap: 12px;
+  }
+  .science-note p {
+    font-size: 13px;
+  }
+  .result-screen h2 {
+    font-size: 16px;
+  }
+  .weather-report {
+    padding: 15px 12px;
+    font-size: 11px;
+  }
+  .weather-report > svg {
+    width: 18px;
+  }
+  .night-heading {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .night-heading h2 {
+    font-size: 22px;
+  }
+  .night-heading > span {
+    font-size: 10px;
+  }
+  .night-heading button {
+    font-size: 11px;
+    padding: 8px;
+  }
+  .base-map {
+    aspect-ratio: 0.86;
+  }
+  .station {
+    width: 63px;
+    min-height: 55px;
+    padding: 6px 3px;
+  }
+  .station small {
+    font-size: 7px;
+  }
+  .station svg {
+    width: 13px;
+    height: 13px;
+  }
+  .map-player {
+    width: 32px;
+    height: 52px;
+  }
+  .map-bottom {
+    display: block;
+  }
+  .nearby-task {
+    margin: 18px 0;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .nearby-task strong {
+    font-size: 11px;
+  }
+  .nearby-task span {
+    font-size: 10px;
+  }
+  .inventory {
+    bottom: 15px;
+    right: 15px;
+  }
+  .inventory-trigger {
+    height: 42px;
+    font-size: 12px;
+  }
+  .inventory-panel {
+    width: 290px;
+  }
+  .task-heading h2 {
+    font-size: 21px;
+  }
+  .timer {
+    font-size: 20px;
+  }
+  .wire {
+    min-width: 120px;
+    height: 50px;
+    font-size: 11px;
+  }
+  .wire-board {
+    gap: 25px;
+  }
+  .matching-board label {
+    gap: 10px;
+    font-size: 11px;
+  }
+  .matching-board select {
+    font-size: 11px;
+    padding: 10px 6px;
+  }
+  .task-options button {
+    font-size: 11px;
+  }
+  .emergency-title h1 {
+    font-size: 22px;
+  }
+  .emergency-title strong {
+    font-size: 35px;
+  }
+  .effect {
+    font-size: 11px;
+  }
+  .end-screen h2 {
+    font-size: 20px;
+  }
+  .end-actions {
+    flex-wrap: wrap;
+  }
+  .academy-footer {
+    padding: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 9px;
+  }
+  .academy-footer > span:last-of-type {
+    max-width: 240px;
+  }
+  .credits-roll p {
+    font-size: 16px;
+  }
+  .credits-roll a {
+    font-size: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  .credits-window {
+    height: auto;
+    max-height: 70vh;
+    overflow: auto;
+    mask-image: none;
+  }
+  .credits-roll {
+    animation: none;
+    transform: none;
+    padding: 20px 0;
+  }
+  .emergency-active {
+    outline: 5px solid var(--danger);
+    outline-offset: -5px;
+  }
+}
+
+/* Full-screen playable stages; uploaded art stays unobstructed between transmissions. */
+:root {
+  --stage-ink: oklch(0.12 0.025 290);
+  --console-surface: oklch(0.22 0.095 290);
+  --console-rim: oklch(0.58 0.19 300);
+  --console-shadow: 0 4px 0 var(--stage-ink), inset 0 0 0 2px var(--console-rim);
+}
+.immersive {
+  position: relative;
+  min-height: 100svh;
+  background: var(--stage-ink);
+}
+.game-environment {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.game-environment img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  image-rendering: pixelated;
+  transition: filter 1.1s ease;
+}
+.is-night .game-environment img {
+  filter: brightness(0.55) saturate(0.65);
+}
+.is-world .game-environment img {
+  filter: brightness(0.75);
+}
+.light-dusk .game-environment img {
+  filter: brightness(0.55) saturate(0.65);
+}
+.light-dawn .game-environment img {
+  filter: brightness(1) saturate(1);
+}
+.immersive .academy-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 25;
+  min-height: 46px;
+  padding: 8px 22px;
+  border: 0;
+  background: transparent;
+  gap: 10px;
+}
+.immersive .academy-wordmark {
+  font-size: 11px;
+  text-shadow: 0 2px 2px var(--stage-ink);
+  margin-right: auto;
+}
+.immersive .academy-wordmark svg {
+  width: 18px;
+}
+.immersive .header-mission {
+  display: none;
+}
+.immersive .academy-header button {
+  background: var(--console-surface);
+  color: var(--foreground);
+  border: 1px solid var(--console-rim);
+}
+.immersive .game-content {
+  position: relative;
+  z-index: 5;
+  min-height: 100svh;
+}
+.immersive .academy-footer {
+  position: fixed;
+  bottom: 14px;
+  left: 20px;
+  z-index: 28;
+  background: transparent;
+  padding: 0;
+  border: 0;
+}
+.immersive .academy-footer > span {
+  display: none;
+}
+.immersive .academy-footer button {
+  background: var(--console-surface);
+  border: 1px solid var(--console-rim);
+  color: var(--foreground);
+}
+.immersive .hud {
+  position: absolute;
+  z-index: 20;
+  inset: 60px 22px auto;
+  display: block;
+  height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  pointer-events: none;
+}
+.immersive .hud-day {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 195px;
+  padding: 12px 16px;
+  background: var(--console-surface);
+  border: 3px double var(--secondary);
+  box-shadow: var(--console-shadow);
+  border-radius: 2px;
+}
+.immersive .hud-day > span {
+  font-size: 11px;
+}
+.immersive .hud-day strong {
+  font-size: 23px;
+}
+.immersive .hud-stat {
+  margin-left: auto;
+  width: 290px;
+  padding: 6px 14px;
+  background: var(--console-surface);
+  border-inline: 3px double var(--secondary);
+}
+.immersive .hud-stat:nth-child(2) {
+  padding-top: 14px;
+  border-top: 3px double var(--secondary);
+}
+.immersive .hud-stat:last-child {
+  padding-bottom: 14px;
+  border-bottom: 3px double var(--secondary);
+  box-shadow: 0 4px 0 var(--stage-ink);
+}
+.immersive .hud-stat > div {
+  flex-wrap: nowrap;
+  font-size: 11px;
+  gap: 8px;
+}
+.immersive .hud-stat strong {
+  width: auto;
+  margin-left: auto;
+  font-size: 12px;
+}
+.immersive progress {
+  height: 9px;
+  border: 1px solid var(--console-rim);
+  border-radius: 0;
+  margin-top: 3px;
+}
+.immersive .hud-stat progress {
+  background: repeating-linear-gradient(90deg, var(--muted) 0 12px, var(--stage-ink) 12px 14px);
+}
+.immersive .hud-stat progress::-webkit-progress-value {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--secondary) 0 12px,
+    var(--console-surface) 12px 14px
+  );
+}
+.immersive .stat-water progress::-webkit-progress-value {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--science) 0 12px,
+    var(--console-surface) 12px 14px
+  );
+}
+.immersive .stat-energy progress::-webkit-progress-value {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--warning) 0 12px,
+    var(--console-surface) 12px 14px
+  );
+}
+.immersive .stat-food progress::-webkit-progress-value {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--mars-red) 0 12px,
+    var(--console-surface) 12px 14px
+  );
+}
+.immersive .stat-health progress::-webkit-progress-value {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--success) 0 12px,
+    var(--console-surface) 12px 14px
+  );
+}
+.cabin-crew {
+  position: fixed;
+  z-index: 2;
+  left: 16%;
+  right: 12%;
+  bottom: 31%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.cabin-crew img {
+  height: 180px;
+  width: 130px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 6px 2px var(--stage-ink));
+}
+.is-night .cabin-crew {
+  filter: brightness(0.7);
+}
+.immersive .day-screen,
+.immersive .emergency-screen,
+.immersive .night-cabin {
+  position: relative;
+  max-width: 1180px;
+  min-height: 100svh;
+  margin: auto;
+  padding: 280px 30px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: 0;
+}
+.immersive .mission-banner {
+  position: absolute;
+  top: 76px;
+  left: 245px;
+  right: 345px;
+  text-shadow: 0 3px 2px var(--stage-ink);
+}
+.immersive .mission-banner h1 {
+  font-size: 20px;
+}
+.immersive .mission-location {
+  display: none;
+}
+.immersive .dialogue {
+  border: 3px double var(--secondary);
+  border-radius: 2px;
+  background: color-mix(in oklab, var(--console-surface) 96%, transparent);
+  box-shadow: var(--console-shadow);
+  margin: 14px 0;
+  padding: 18px 22px;
+}
+.immersive .dialogue-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+}
+.immersive .dialogue-text p,
+.transmission-text {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+.transmission {
+  animation: transmission-in 0.4s ease both;
+}
+.transmission-text {
+  min-height: 3.2em;
+}
+.text-cursor {
+  color: var(--secondary);
+  animation: cursor-blink 0.8s steps(2) infinite;
+}
+.transmission-next {
+  float: right;
+  color: var(--secondary);
+  font-size: 12px;
+  margin-top: 8px;
+}
+.immersive .choice-heading {
+  margin: 8px 0 12px;
+  color: var(--foreground);
+  text-shadow: 0 2px 2px var(--stage-ink);
+}
+.immersive .daily-choices {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  animation: transmission-in 0.35s ease both;
+}
+.immersive .decision-button {
+  align-items: flex-start;
+  min-height: 92px;
+  padding: 14px 12px;
+  gap: 10px;
+  border: 2px solid var(--console-rim);
+  border-bottom-width: 5px;
+  border-radius: 2px;
+  background: var(--console-surface);
+  font-size: 13px;
+  transition:
+    transform 0.15s,
+    border-color 0.15s;
+}
+.immersive .decision-button:hover {
+  transform: translateY(-4px);
+  border-color: var(--secondary);
+  background: var(--primary);
+}
+.immersive .choice-letter {
+  width: 26px;
+  height: 30px;
+  border: 0;
+  background: var(--primary);
+  color: var(--foreground);
+  font-size: 12px;
+}
+.immersive .decision-button > svg {
+  width: 14px;
+  margin-top: 6px;
+}
+.immersive .weather-report {
+  padding: 12px 18px;
+  background: var(--console-surface);
+  margin-bottom: 8px;
+}
+.immersive .result-screen,
+.immersive .task-screen,
+.immersive .end-screen {
+  position: relative;
+  max-width: 920px;
+  min-height: 100svh;
+  padding: 310px 30px 110px;
+}
+.immersive .result-screen > h1,
+.immersive .result-screen > h2,
+.immersive .result-screen > p,
+.immersive .end-screen > h1,
+.immersive .end-screen > p,
+.immersive .end-screen > h2 {
+  text-shadow: 0 2px 4px var(--stage-ink);
+}
+.immersive .science-note {
+  background: color-mix(in oklab, var(--console-surface) 96%, transparent);
+  border: 2px solid var(--science);
+  margin: 16px 0;
+}
+.immersive .result-screen h1 {
+  font-size: 24px;
+}
+.immersive .result-screen h2 {
+  font-size: 16px;
+}
+.immersive .task-screen {
+  max-width: 860px;
+}
+.immersive .task-heading,
+.immersive .task-instructions,
+.immersive .task-message {
+  background: var(--console-surface);
+  padding: 14px 20px;
+  border-inline: 2px solid var(--console-rim);
+  margin: 0;
+}
+.immersive .task-heading {
+  border-top: 2px solid var(--console-rim);
+}
+.immersive .task-message {
+  border-bottom: 2px solid var(--console-rim);
+}
+.immersive .task-screen > div:not(.task-heading) {
+  background-color: var(--console-surface);
+  padding: 20px;
+  border: 2px solid var(--console-rim);
+}
+.immersive .night-cabin {
+  max-width: 920px;
+}
+.night-cabin h1 {
+  font-size: 26px;
+  text-shadow: 0 2px 4px var(--stage-ink);
+  margin: 12px 0;
+}
+.night-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.night-actions button {
+  border: 2px solid var(--console-rim);
+  background: var(--console-surface);
+  min-height: 48px;
+}
+.world-screen {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+}
+.world-viewport {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+}
+.world-canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 100svh;
+}
+.world-scenery {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  image-rendering: pixelated;
+}
+.mission-beacon {
+  position: absolute;
+  transform: translate(-50%, -90%);
+  color: var(--warning);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  pointer-events: none;
+}
+.mission-beacon > svg {
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 2px 0 var(--stage-ink));
+  animation: beacon-bob 2s ease-in-out infinite;
+}
+.mission-beacon > span {
+  font-size: 10px;
+  font-weight: 900;
+  white-space: nowrap;
+  padding: 2px 6px;
+  background: var(--console-surface);
+  border: 1px solid var(--console-rim);
+}
+.mission-beacon.complete {
+  color: var(--success);
+}
+.mission-beacon.near > span {
+  border-color: var(--warning);
+}
+.world-heading {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 26;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.world-heading > span {
+  font-size: 10px;
+  padding: 8px;
+  background: var(--console-surface);
+  white-space: nowrap;
+}
+.world-heading button {
+  background: var(--console-surface);
+  border: 2px solid var(--console-rim);
+  font-size: 12px;
+}
+.world-controls {
+  position: absolute;
+  bottom: 70px;
+  left: 25px;
+  right: 25px;
+  z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 15px;
+  pointer-events: none;
+}
+.world-controls > * {
+  pointer-events: auto;
+}
+.world-controls .direction-pad button {
+  width: 46px;
+  height: 46px;
+  border: 2px solid var(--console-rim);
+  background: var(--console-surface);
+  touch-action: none;
+}
+.proximity-prompt {
+  background: var(--console-surface);
+  padding: 14px 20px;
+  border: 3px double var(--secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 400px;
+}
+.proximity-prompt strong {
+  font-size: 14px;
+}
+.proximity-prompt > span {
+  color: var(--success);
+  font-size: 12px;
+}
+.proximity-prompt button {
+  white-space: normal;
+  height: auto;
+  min-height: 38px;
+}
+.immersive .inventory {
+  bottom: 16px;
+  right: 20px;
+}
+.immersive .inventory-trigger {
+  background: var(--console-surface);
+  border: 3px double var(--secondary);
+  border-radius: 2px;
+}
+.immersive.emergency-active {
+  animation: none;
+}
+.emergency-active .game-environment::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklab, var(--danger) 25%, transparent);
+  animation: alarm-light 1.4s ease-in-out infinite;
+}
+.immersive .emergency-title {
+  background: var(--console-surface);
+  border: 2px solid var(--danger);
+  padding: 12px 18px;
+  margin: 10px 0;
+}
+.immersive .emergency-title h1 {
+  font-size: 22px;
+}
+.immersive .emergency-screen > .eyebrow {
+  background: var(--console-surface);
+  padding: 8px;
+  align-self: flex-start;
+}
+.cutscene-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--stage-ink);
+  z-index: 80;
+}
+.cutscene-screen video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.cutscene-skip {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--console-surface);
+}
+.cutscene-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.tutorial-button {
+  margin: 15px 0 0 15px;
+  height: 48px;
+  background: var(--console-surface);
+  border-color: var(--secondary);
+}
+.tutorial-panel {
+  position: relative;
+}
+.tutorial-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+.tutorial-panel h2 {
+  margin-top: 12px;
+}
+@keyframes transmission-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes cursor-blink {
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes beacon-bob {
+  50% {
+    transform: translateY(-5px);
+  }
+}
+@keyframes alarm-light {
+  50% {
+    opacity: 0.15;
+  }
+}
+@media (max-width: 760px) {
+  .immersive .academy-header {
+    padding: 8px 12px;
+  }
+  .immersive .hud {
+    inset: 56px 12px auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    height: auto;
+  }
+  .immersive .hud-day {
+    position: static;
+    grid-column: 1 / -1;
+    width: 150px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 5px 10px;
+    margin-bottom: 8px;
+  }
+  .immersive .hud-day strong {
+    font-size: 16px;
+  }
+  .immersive .hud-stat,
+  .immersive .hud-stat:nth-child(2),
+  .immersive .hud-stat:last-child {
+    width: 100%;
+    padding: 7px 8px;
+    border: 1px solid var(--console-rim);
+    box-shadow: none;
+    margin: 0;
+  }
+  .immersive .hud-stat > div {
+    font-size: 9px;
+    gap: 4px;
+  }
+  .immersive .hud-stat strong {
+    font-size: 10px;
+  }
+  .immersive .hud-stat svg {
+    display: none;
+  }
+  .immersive .day-screen,
+  .immersive .emergency-screen,
+  .immersive .night-cabin {
+    padding: 260px 14px 90px;
+    min-height: 100svh;
+  }
+  .immersive .mission-banner {
+    position: static;
+    text-shadow: 0 2px 3px var(--stage-ink);
+    margin-bottom: 8px;
+  }
+  .immersive .mission-banner h1 {
+    font-size: 18px;
+  }
+  .immersive .daily-choices {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .immersive .decision-button {
+    min-height: 56px;
+    font-size: 12px;
+    align-items: center;
+    padding: 10px;
+  }
+  .immersive .dialogue {
+    padding: 14px 12px;
+    gap: 12px;
+  }
+  .immersive .dialogue > img {
+    width: 44px;
+    height: 78px;
+  }
+  .immersive .dialogue-text p,
+  .transmission-text {
+    font-size: 13px;
+  }
+  .immersive .dialogue-name {
+    font-size: 11px;
+  }
+  .transmission-next {
+    font-size: 11px;
+  }
+  .cabin-crew {
+    bottom: 40%;
+    left: 10%;
+    right: 8%;
+  }
+  .cabin-crew img {
+    height: 110px;
+    width: 75px;
+  }
+  .immersive .result-screen,
+  .immersive .task-screen,
+  .immersive .end-screen {
+    padding: 240px 14px 100px;
+  }
+  .world-canvas {
+    width: max(100%, calc(100svh * 1.77));
+  }
+  .world-heading {
+    top: 209px;
+    left: 12px;
+    right: 12px;
+    transform: none;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .world-heading > span {
+    font-size: 8px;
+  }
+  .world-controls {
+    left: 12px;
+    right: 12px;
+    bottom: 72px;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .world-controls .direction-pad button {
+    width: 42px;
+    height: 42px;
+  }
+  .proximity-prompt {
+    max-width: 100%;
+    padding: 10px 14px;
+  }
+  .proximity-prompt strong {
+    font-size: 12px;
+  }
+  .mission-beacon > span {
+    font-size: 9px;
+  }
+  .night-cabin h1 {
+    font-size: 22px;
+  }
+  .night-actions {
+    gap: 10px;
+  }
+  .night-actions button {
+    font-size: 12px;
+  }
+  .immersive .academy-footer {
+    bottom: 16px;
+    left: 12px;
+  }
+  .tutorial-button {
+    margin-left: 0;
+    display: flex;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .game-environment img {
+    transition: none;
+  }
+  .transmission,
+  .mission-beacon > svg,
+  .text-cursor,
+  .emergency-active .game-environment::after {
+    animation: none;
+  }
+}
+/* Keep framed task grids inside narrow viewports and the map's own camera. */
+.immersive .rover-grid,
+.immersive .robot-grid,
+.immersive .dust-grid {
+  width: 100%;
+  max-width: 360px;
+  min-width: 0;
+}
+.immersive .rover-grid button {
+  min-width: 0;
+  padding-inline: 0;
+}
+.immersive .world-scenery {
+  max-width: none;
+}
+.immersive .wire-board {
+  gap: 20px;
+}
+.immersive .wire {
+  min-width: 0;
+  width: 100%;
+}
+.immersive .wire-board > div {
+  flex: 1;
+  min-width: 0;
+}
+@media (max-width: 760px) {
+  .immersive .task-screen > div:not(.task-heading) {
+    padding: 14px;
+  }
+  .immersive .task-heading h2 {
+    font-size: 19px;
+  }
+  .immersive .matching-board select {
+    min-width: 0;
+  }
+}
+.world-canvas {
+  width: max(100%, calc(100svh * 1.77));
+  height: max(100svh, calc(100vw / 1.77));
+}
+.is-world .game-environment {
+  background: var(--stage-ink);
+}
+.immersive .academy-header {
+  pointer-events: none;
+}
+.immersive .academy-header > * {
+  pointer-events: auto;
+}
+.immersive button {
+  scroll-margin-block: 260px 110px;
+}
+.immersive .academy-footer {
+  pointer-events: none;
+}
+.immersive .academy-footer button {
+  pointer-events: auto;
+}
+.immersive .academy-footer {
+  top: 8px;
+  right: 110px;
+  bottom: auto;
+  left: auto;
+}
+@media (max-width: 760px) {
+  .immersive .academy-footer {
+    top: 10px;
+    right: 105px;
+    bottom: auto;
+    left: auto;
+  }
+  .immersive .academy-footer button {
+    width: 30px;
+    padding: 0;
+    font-size: 0;
+    gap: 0;
+  }
+}
+
+/* A compact, collapsible in-scene resource console, with reserved dialogue space. */
+.language-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  font-size: 13px;
+}
+.language-menu select {
+  background: var(--card);
+  color: var(--foreground);
+  border: 1px solid var(--secondary);
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+.immersive .hud {
+  display: block;
+  height: 0;
+  pointer-events: none;
+}
+.hud-resources {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 290px;
+  pointer-events: auto;
+}
+.hud-toggle {
+  width: 100%;
+  min-height: 36px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  background: var(--console-surface);
+  border: 3px double var(--secondary);
+  border-radius: 2px;
+  font-size: 11px;
+}
+.hud-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+.hud-toggle svg:last-child {
+  margin-left: auto;
+}
+.immersive .hud-stat {
+  width: 100%;
+  margin: 0;
+}
+.immersive .hud-stat:first-child {
+  padding-top: 10px;
+}
+.immersive .day-screen,
+.immersive .emergency-screen,
+.immersive .night-cabin {
+  padding-top: 370px;
+}
+.immersive .result-screen,
+.immersive .task-screen {
+  padding-top: 370px;
+}
+.immersive.indicators-closed .day-screen,
+.immersive.indicators-closed .emergency-screen,
+.immersive.indicators-closed .night-cabin,
+.immersive.indicators-closed .result-screen,
+.immersive.indicators-closed .task-screen {
+  padding-top: 180px;
+}
+.cabin-crew {
+  bottom: 28%;
+  transition: filter 1.1s ease;
+}
+.is-night .cabin-crew,
+.light-dusk .cabin-crew {
+  filter: brightness(0.55) saturate(0.65);
+}
+.light-dawn .cabin-crew {
+  filter: brightness(1) saturate(1);
+}
+.is-ending,
+.immersive.is-ending .end-screen {
+  background: var(--background);
+}
+.is-ending .game-environment {
+  display: none;
+}
+.immersive.is-ending .end-screen {
+  max-width: 1050px;
+  padding-top: 370px;
+}
+.immersive.is-ending.indicators-closed .end-screen {
+  padding-top: 150px;
+}
+@media (max-width: 760px) {
+  .hud-resources {
+    width: min(245px, calc(100vw - 24px));
+    top: 47px;
+  }
+  .immersive .hud-day {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 140px;
+  }
+  #resource-indicators {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .immersive .hud-stat {
+    padding: 7px 8px;
+  }
+  .immersive .hud-stat:first-child {
+    padding-top: 7px;
+  }
+  .immersive .day-screen,
+  .immersive .emergency-screen,
+  .immersive .night-cabin,
+  .immersive .result-screen,
+  .immersive .task-screen,
+  .immersive.is-ending .end-screen {
+    padding-top: 325px;
+  }
+  .immersive.indicators-closed .day-screen,
+  .immersive.indicators-closed .emergency-screen,
+  .immersive.indicators-closed .night-cabin,
+  .immersive.indicators-closed .result-screen,
+  .immersive.indicators-closed .task-screen {
+    padding-top: 180px;
+  }
+  .world-heading {
+    top: 54px;
+    left: auto;
+    right: 12px;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .world-heading > span {
+    white-space: normal;
+  }
+  .cabin-crew {
+    bottom: 37%;
+  }
+}
+@media (max-width: 760px) {
+  .immersive .mission-banner {
+    position: absolute;
+    top: 65px;
+    left: 14px;
+    right: auto;
+    max-width: 170px;
+  }
+  .immersive .mission-banner h1 {
+    font-size: 16px;
+  }
+  .immersive .mission-banner .eyebrow {
+    font-size: 9px;
+  }
+  .is-ending .hud-resources {
+    z-index: 1;
+  }
+}
+
+/* Final release disclosures and official live-data panel. */
+.academy-logo {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+.ai-disclosure {
+  position: fixed;
+  top: 30px;
+  left: 12px;
+  z-index: 79;
+  padding: 3px 7px;
+  background: var(--console-surface);
+  color: var(--foreground);
+  font-size: 11px;
+  line-height: 1.4;
+  pointer-events: none;
+}
+.ai-disclosure.on-video {
+  z-index: 81;
+  top: 16px;
+}
+.mars-app:not(.immersive) .ai-disclosure:not(.on-video) {
+  top: 76px;
+}
+@media (max-width: 760px) {
+}
+.immersive .weather-report {
+  flex-wrap: wrap;
+  border: 2px solid var(--science);
+}
+.weather-report > div {
+  flex: 1;
+  min-width: 0;
+}
+.weather-report small {
+  display: block;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.weather-report a {
+  color: var(--science);
+  font-size: 12px;
+  text-decoration: underline;
+}
+
+/* Launch release: home menu, soundtrack controls, compact indicators, credits scenery. */
+.game-controls {
+  position: fixed;
+  top: 10px;
+  left: 12px;
+  z-index: 90;
+  display: flex;
+  gap: 6px;
+}
+.game-controls > button {
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  background: var(--console-surface);
+  border: 2px solid var(--secondary);
+  color: var(--foreground);
+}
+.volume-popover {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--console-surface);
+  border: 2px solid var(--secondary);
+  border-radius: 4px;
+}
+.volume-popover input {
+  width: 130px;
+  accent-color: var(--secondary);
+}
+.academy-header,
+.immersive .academy-header {
+  padding-left: 100px;
+}
+.ai-disclosure,
+.ai-disclosure.on-video,
+.mars-app:not(.immersive) .ai-disclosure:not(.on-video) {
+  top: max(6px, env(safe-area-inset-top));
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  z-index: 85;
+  font-size: 10px;
+  background: transparent;
+  opacity: 0.75;
+  text-shadow: 0 1px 2px var(--stage-ink);
+}
+.immersive .academy-header {
+  top: 18px;
+}
+.immersive .hud {
+  top: 72px;
+}
+.immersive .academy-footer {
+  top: 26px;
+}
+.world-heading {
+  top: 30px;
+}
+.is-home .academy-header,
+.is-home .academy-footer {
+  display: none;
+}
+.home-screen {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 56px 16px 20px;
+}
+.home-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.home-menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: min(300px, 100%);
+  margin-top: max(210px, 38svh);
+}
+.home-button {
+  width: 100%;
+  height: 50px;
+  font-size: 15px;
+  font-weight: 900;
+  border: 2px solid var(--secondary);
+  border-bottom-width: 5px;
+  border-radius: 5px;
+  background: var(--primary);
+  box-shadow: var(--shadow-panel);
+  gap: 10px;
+}
+.home-menu .adjustment-toggle {
+  margin-top: 4px;
+  padding: 4px 10px;
+  background: var(--console-surface);
+  border-radius: 4px;
+  color: var(--foreground);
+}
+.home-bottom {
+  position: relative;
+  margin-top: auto;
+  padding-top: 24px;
+  text-align: center;
+}
+.home-slogan {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+  padding: 8px 14px;
+  background: var(--console-surface);
+  border-radius: 4px;
+}
+.home-bottom small {
+  display: block;
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--muted-foreground);
+}
+/* Smaller resource console that stays clear of the decision boxes. */
+.hud-resources {
+  width: 220px;
+}
+.immersive .hud-stat {
+  padding: 3px 10px;
+}
+.immersive .hud-stat:first-child {
+  padding-top: 6px;
+}
+.immersive .hud-stat > div,
+.immersive .hud-stat strong {
+  font-size: 10px;
+}
+.immersive .hud-stat svg {
+  width: 12px;
+  height: 12px;
+}
+.immersive .hud-stat progress {
+  height: 6px;
+  margin-top: 1px;
+}
+.hud-toggle {
+  min-height: 30px;
+}
+.immersive .day-screen,
+.immersive .emergency-screen,
+.immersive .night-cabin,
+.immersive .result-screen,
+.immersive .task-screen {
+  padding-top: 280px;
+}
+.immersive.is-ending .end-screen {
+  padding-top: 280px;
+}
+/* Every overlay menu scrolls to its last line on small screens. */
+.diary-overlay {
+  overflow-y: auto;
+  padding: 52px 12px 20px;
+}
+.diary-overlay section {
+  max-height: calc(100svh - 72px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+/* Credits directly over the original Martian horizon. */
+.credits-screen {
+  min-height: 100svh;
+  background-size: cover;
+  background-position: center;
+  padding-top: 56px;
+}
+.credits-window {
+  max-width: 760px;
+  margin: 0 auto 12px;
+  mask-image: none;
+}
+.credits-roll {
+  font-weight: 800;
+  text-shadow: 0 2px 2px var(--stage-ink), 1px 0 var(--stage-ink), -1px 0 var(--stage-ink);
+}
+.credits-screen > button {
+  box-shadow: var(--shadow-panel);
+}
+.immersive.is-ending .academy-footer {
+  top: auto;
+  right: auto;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  left: 12px;
+}
+/* iOS Safari: stop long-press image copy and callouts on the map and its controls. */
+.world-screen,
+.world-screen * {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.world-screen img {
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+.world-controls button {
+  touch-action: none;
+}
+@media (max-width: 760px) {
+  .diary-overlay section {
+    padding: 22px 18px;
+  }
+  .diary-overlay p {
+    font-size: 13px;
+    margin: 10px 0;
+  }
+  .hud-resources {
+    width: min(210px, calc(100vw - 24px));
+  }
+  .immersive .hud-stat {
+    padding: 3px 6px;
+  }
+  .immersive .day-screen,
+  .immersive .emergency-screen,
+  .immersive .night-cabin,
+  .immersive .result-screen,
+  .immersive .task-screen,
+  .immersive.is-ending .end-screen {
+    padding-top: 340px;
+    padding-bottom: max(100px, calc(env(safe-area-inset-bottom) + 90px));
+  }
+  .immersive.indicators-closed .day-screen,
+  .immersive.indicators-closed .emergency-screen,
+  .immersive.indicators-closed .night-cabin,
+  .immersive.indicators-closed .result-screen,
+  .immersive.indicators-closed .task-screen,
+  .immersive.is-ending.indicators-closed .end-screen {
+    padding-top: 190px;
+  }
+  .immersive .mission-banner {
+    position: static;
+    max-width: none;
+    margin-bottom: 12px;
+  }
+  .immersive .academy-header {
+    top: env(safe-area-inset-top);
+    min-height: 54px;
+    padding-block: 10px;
+  }
+  .academy-wordmark span {
+    display: none;
+  }
+  .academy-logo {
+    width: 28px;
+    height: 28px;
+  }
+  .immersive .academy-header button,
+  .immersive .academy-footer button,
+  .game-controls > button {
+    width: 40px;
+    height: 40px;
+  }
+  .game-controls {
+    top: max(8px, env(safe-area-inset-top));
+    left: max(12px, env(safe-area-inset-left));
+  }
+  .immersive .academy-footer {
+    top: max(10px, env(safe-area-inset-top));
+    right: 62px;
+  }
+  .immersive .hud {
+    top: calc(90px + env(safe-area-inset-top));
+  }
+  .is-world .hud-resources {
+    top: 120px;
+  }
+  .world-heading {
+    top: calc(140px + env(safe-area-inset-top));
+    left: 12px;
+    right: 12px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .world-heading > span {
+    font-size: 10px;
+    flex: 0 1 80px;
+  }
+  .world-heading button {
+    min-height: 44px;
+    height: auto;
+    white-space: normal;
+    flex: 1;
+    max-width: 220px;
+    padding: 8px;
+  }
+  .world-controls {
+    bottom: max(76px, calc(env(safe-area-inset-bottom) + 76px));
+  }
+  .world-controls .direction-pad button {
+    width: 44px;
+    height: 44px;
+  }
+  .immersive .inventory {
+    bottom: max(16px, calc(env(safe-area-inset-bottom) + 12px));
+    right: 12px;
+  }
+  .inventory-panel {
+    width: min(290px, calc(100vw - 24px));
+  }
+  .night-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .night-actions button,
+  .end-actions button,
+  .result-screen > button {
+    white-space: normal;
+    height: auto;
+    min-height: 48px;
+    padding-block: 10px;
+  }
+  .task-heading > div {
+    min-width: 0;
+  }
+  .matching-board label {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .matching-board select {
+    width: 100%;
+  }
+  .task-options button {
+    min-height: 60px;
+    height: auto;
+  }
+  .credits-screen {
+    padding-inline: 14px;
+  }
+  .credits-roll a {
+    font-size: 14px;
+  }
+  .credits-roll h1,
+  .credits-roll h2,
+  .credits-roll p,
+  .science-source {
+    overflow-wrap: anywhere;
+  }
+  .home-screen {
+    padding-top: max(56px, calc(env(safe-area-inset-top) + 56px));
+    padding-bottom: max(20px, calc(env(safe-area-inset-bottom) + 20px));
+  }
+  .home-menu {
+    margin-top: max(210px, 30svh);
+  }
+  .ai-disclosure,
+  .ai-disclosure.on-video,
+  .mars-app:not(.immersive) .ai-disclosure:not(.on-video) {
+    font-size: 9px;
+    max-width: calc(100% - 24px);
+    top: max(54px, calc(env(safe-area-inset-top) + 54px));
+    left: auto;
+    right: max(12px, env(safe-area-inset-right));
+    transform: none;
+  }
+  .home-button {
+    height: 46px;
+  }
+}
+.immersive .hud-stat:nth-child(2) {
+  padding-top: 3px;
+  border-top: 0;
+}
+.diary-overlay {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+.diary-overlay section {
+  width: min(600px, 100%);
+  min-width: 0;
+}
+.tutorial-panel p strong {
+  margin-right: 5px;
+}
+@media (max-width: 760px) {
+  .immersive .academy-wordmark span {
+    display: none;
+  }
+}

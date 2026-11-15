@@ -1,0 +1,162 @@
+[
+  {
+    "path": "public/mars-media/andreas.png",
+    "size": 145072,
+    "sha256": "533cc5bb685401f4ac0ce833cc2c7c4e0284f17a23f7051b6b3c63ed886e87f1"
+  },
+  {
+    "path": "public/mars-media/arrival-cutscene.mp4",
+    "size": 11811963,
+    "sha256": "1d74ed3493b85817c8c907251aff369a9da9421768c5a5eb75ffac2f14a1e8ba"
+  },
+  {
+    "path": "public/mars-media/arrival-english.mp4",
+    "size": 6388036,
+    "sha256": "9caba6a0fb4566b8789bdc3554f594e737a80ff0cdc2b6075c8711d7e4b9936d"
+  },
+  {
+    "path": "public/mars-media/base-scene.jpg",
+    "size": 239664,
+    "sha256": "aaeacffda7933c6c2f2cd7220782260961050232c5aaf99845e499c957bb437a"
+  },
+  {
+    "path": "public/mars-media/home_background.mp4",
+    "size": 1351514,
+    "sha256": "4028c6c9a7c68d1abb8f50dd98fd9882bdd815405283d86c92f558b6b6d181a4"
+  },
+  {
+    "path": "public/mars-media/laika.png",
+    "size": 131834,
+    "sha256": "e60106d65a29cdf2fe4b1f618f1fd3f45ab6ebd6c322b01264956e1431678d56"
+  },
+  {
+    "path": "public/mars-media/lina.png",
+    "size": 139352,
+    "sha256": "12d8b8e47f1bb8c67acbbe4fc144d2338484669156b17d6d8725a26ac25c8f67"
+  },
+  {
+    "path": "public/mars-media/mars-academy-logo.png",
+    "size": 1032578,
+    "sha256": "1e2b6663f6c32a38802680649acc85af3243ee1401628e83bcd6c7cc7c83512c"
+  },
+  {
+    "path": "public/mars-media/martian_horizon_sunset.png",
+    "size": 1998647,
+    "sha256": "e9b05b630f0e175ddef08359eb88ea9557c13e77bf2099c304a127d4710a7880"
+  },
+  {
+    "path": "public/mars-media/maya-directional.png",
+    "size": 795505,
+    "sha256": "99672c37666714a962bdcd20a4c16354db9b5972dd35f150e86623ea79fb429e"
+  },
+  {
+    "path": "public/mars-media/maya-sprites.png",
+    "size": 1229128,
+    "sha256": "2110b38b4112042537dec706635cc786de2b17622f00eef9448d710c54f2678f"
+  },
+  {
+    "path": "public/mars-media/maya.png",
+    "size": 140651,
+    "sha256": "2e7622ffc44bde7076d252c6f469ede9b4c80b23d60ad49ad33c3ec0e470e1aa"
+  },
+  {
+    "path": "public/mars-media/milo-directional.png",
+    "size": 725103,
+    "sha256": "141992b5a615d8345af93f3d3ee9ef892c408d8b8228e60eb7b7e74de29b3ae9"
+  },
+  {
+    "path": "public/mars-media/milo-sprites.png",
+    "size": 1145312,
+    "sha256": "438a477ae99e010e1341414a82b33249406d3ae7582b8e801a03033e3d864bdb"
+  },
+  {
+    "path": "public/mars-media/milo.png",
+    "size": 140656,
+    "sha256": "bdfb0c98b5361da766b115620985a07a1967f45b0469fcb213579fc443f7a737"
+  },
+  {
+    "path": "public/mars-media/missions/area_de_exploracao.jpeg",
+    "size": 369069,
+    "sha256": "6b874bbf4b650fb11873917a99ca55c6579084ddf28eeb266f56c77267b57f34"
+  },
+  {
+    "path": "public/mars-media/missions/area_externa.jpeg",
+    "size": 330763,
+    "sha256": "8ece2a1c8535341f14e67010e8adfe9bd389c38c430049d32635fb3ab550218a"
+  },
+  {
+    "path": "public/mars-media/missions/estacao_de_comunicacao.jpeg",
+    "size": 317968,
+    "sha256": "f3c32b4772eafefac4be0aa5aa123bb69fcc300c2acc98c280bb017e450f6845"
+  },
+  {
+    "path": "public/mars-media/missions/laboratorio_de_analises.jpeg",
+    "size": 356378,
+    "sha256": "4bfa86ee8df12b94dbf75905ac3126dec8adfae0256b1966464d821c3b90b03b"
+  },
+  {
+    "path": "public/mars-media/missions/laboratorio_de_suporte_a_vida.jpeg",
+    "size": 367451,
+    "sha256": "507d037518b01f45205ecb6eae6cab0a6c0855d401d2c0e40c1dde5cd5494c75"
+  },
+  {
+    "path": "public/mars-media/missions/sala_de_energia.jpeg",
+    "size": 349104,
+    "sha256": "634ebb70a8660c324fb93eed8fa3fcb13885bfe63998a5fb4200786febe581c1"
+  },
+  {
+    "path": "public/mars-media/missions/sala_de_equipamentos.jpeg",
+    "size": 344244,
+    "sha256": "5559c1060b0095b6ed9258b8e038f20403a39bf0459df187edad820a210c3d5c"
+  },
+  {
+    "path": "public/mars-media/missions/sala_de_navegacao.jpeg",
+    "size": 342037,
+    "sha256": "f8612fd77844b9c2eaec7ccef1f9d21a79b763984f86ccc0ad9a7b200219c758"
+  },
+  {
+    "path": "public/mars-media/missions/sala_de_tratamento_de_agua.jpeg",
+    "size": 345088,
+    "sha256": "7dafed3ed0f2f5a89b16f506adbb2dcb6b040ff3e0e2c64dcdc89fa20fddd5f9"
+  },
+  {
+    "path": "public/mars-media/music/musica_emergencia.mp3",
+    "size": 321792,
+    "sha256": "9669fffcf28c444434683f0b5b3e5199ff14c24be40f50252f9c95cf6912990c"
+  },
+  {
+    "path": "public/mars-media/music/musica_missao_interrompida.mp3",
+    "size": 6721619,
+    "sha256": "963e7796d72710dd75f9e70630e5d21d8c1baf76046fb43a768dbe871d2412d0"
+  },
+  {
+    "path": "public/mars-media/music/musica_principal_durante_o_jogo.mp3",
+    "size": 4586684,
+    "sha256": "2f877f6f866ea01b1477a381124818152930f9daf604bc928be5cc0e919cf97c"
+  },
+  {
+    "path": "public/mars-media/music/musica_tela_final.mp3",
+    "size": 4544888,
+    "sha256": "d4c4b161f827ef9f7972cebfc08a66aa622e399a71ee0c1de56108a219591682"
+  },
+  {
+    "path": "public/mars-media/music/musica_tela_inicial.mp3",
+    "size": 6133969,
+    "sha256": "5fc81a59c234c281b9afdeedab71e41c0a33ee9d7a669d8a3c1644b659da81e1"
+  },
+  {
+    "path": "public/mars-media/official-cabin.jpeg",
+    "size": 310660,
+    "sha256": "6d500436009c074a57766c0720ffad1c90422eed6b37315d6678934144a7a5a3"
+  },
+  {
+    "path": "public/mars-media/official-world.png",
+    "size": 352034,
+    "sha256": "c6a871d3cd2a660c005c438c805f42293180b6c8aaf3aa347a7e5a6d77154a59"
+  },
+  {
+    "path": "public/mars-media/reference-scene.jpg",
+    "size": 445675,
+    "sha256": "cdc649b208b36e2b705fc2bd9d34ad1ff27dbda0a4e4034745efa886e8e894c7"
+  }
+]

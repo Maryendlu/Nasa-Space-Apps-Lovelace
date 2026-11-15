@@ -1,0 +1,29 @@
+{
+  "project": "Mars Academy",
+  "ai_disclosure": {
+    "generative_ai_used": true,
+    "tool": "Lovable",
+    "code_contains_ai_generated_content": true,
+    "assisted_activities": [
+      "code generation",
+      "implementation changes",
+      "debugging",
+      "translation",
+      "technical documentation"
+    ],
+    "team_role": "Supplied story, requirements and media; directed development and revisions.",
+    "supplied_media_ai_provenance": "Not established by this disclosure"
+  },
+  "data_provenance": {
+    "nasa_observations": {
+      "provider": "NASA CCMC DONKI",
+      "ai_generated": false,
+      "datasets": ["FLR", "CME", "GST"],
+      "documentation": "https://ccmc.gsfc.nasa.gov/DONKI/api/"
+    },
+    "game_simulation": {
+      "description": "Resource values, gameplay effects and educational risk scores are simulation parameters, not NASA measurements or official forecasts.",
+      "missing_observations": "Labeled unavailable; simulated risk is identified separately."
+    }
+  }
+}
